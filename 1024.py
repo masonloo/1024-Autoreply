@@ -121,13 +121,12 @@ class Autoreply:
 
         match=re.findall(pat,con)
         self.match=match
-
         try:
             for data in black_list:
                 self.match.remove(data)
         except:
-            auto.debug('移除失败，知道因为啥。。。')
-            pass
+            auto.debug('移除失败，若出现此信息，请立即停止运行该脚本，删除定时任务中的触发，等待更新')
+            os._exit(0)
 
     def getonelink(self):
         geturl=''
@@ -275,7 +274,7 @@ if __name__ == "__main__":
                 sleep(sleeptime)
                 auto.debug('休眠完成')
         except:
-            print('回复失败，重试')
+            auto.debug('回复失败，重试')
     n=auto.getnumber()
     auto.debug('开始时发表帖子:'+m)
     auto.debug('结束时发表帖子:'+n)
